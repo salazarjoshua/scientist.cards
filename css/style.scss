@@ -1,0 +1,399 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap");
+
+@font-face {
+	font-family: "Hate Your Writing";
+	src: url("/fonts/Hateyourwriting-VGgPx.ttf");
+}
+
+@font-face {
+	font-family: "Audrey";
+	src: url("/fonts/Athena-Regular.ttf");
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	--main-font: "Hate Your Writing", sans-serif;
+	--font-size: 32px;
+	--top-color: #d32a51;
+	--bottom-color: #fff4ee;
+	--text-color: #ff6697;
+	--barcode-color: #f96493;
+	--logo-color: #ffe7e7;
+
+	background-color: #f8f8f8;
+	text-transform: uppercase;
+	font-family: "Hate Your Writing", sans-serif;
+}
+
+body.study {
+	--main-font: "Audrey", sans-serif;
+	--font-size: 20px;
+}
+
+h1,
+h2 {
+	font-size: var(--font-size);
+}
+
+#colorpicker.hide {
+	display: none;
+}
+
+.card-wrapper {
+	width: 640px;
+	height: 400px;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-wrapper.study {
+	--top-color: #94ace5;
+	--bottom-color: #ebf2fc;
+	--text-color: #9fc1ef;
+	--barcode-color: #94ace5;
+	--logo-color: #e2eafa;
+}
+
+.top {
+	font-size: var(--font-size);
+	font-family: var(--main-font);
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	background-color: var(--top-color);
+	height: 64px;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 32px;
+	padding-right: 32px;
+	color: white;
+	font-size: var(--font-size);
+	border-radius: 20px 20px 0px 0px;
+
+	:nth-child(2) {
+		margin-left: 36px;
+	}
+
+	:nth-child(3) {
+		justify-self: right;
+	}
+}
+
+.bottom {
+	position: relative;
+	height: 336px;
+	padding-left: 32px;
+	padding-right: 32px;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	column-gap: 52px;
+	border-radius: 0px 0px 20px 20px;
+	background-color: var(--bottom-color);
+}
+
+.main-img {
+	margin-left: 12px;
+	border: 4px solid var(--top-color);
+	background: var(--bottom-color);
+	width: 204px;
+	height: 260px;
+}
+
+.your-face {
+	display: block;
+	background: var(--logo-color);
+	cursor: pointer;
+	position: relative;
+	max-height: 300px;
+	overflow: hidden;
+	height: 100%;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 10;
+		position: relative;
+		visibility: hidden;
+	}
+	.image-persuader {
+		font-size: var(--font-size);
+		font-family: var(--main-font);
+		position: absolute;
+		color: var(--top-color);
+		top: 50%;
+		text-align: center;
+		width: 100%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.input-file {
+		position: absolute;
+		left: 50%;
+		width: 100%;
+		bottom: 2px;
+		transform: translateX(-50%);
+		padding: 8px;
+		z-index: 11;
+		background: white;
+	}
+
+	.input-file:not(:focus-visible) {
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		height: 1px;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 1px;
+	}
+
+	.input-file:not(:focus) {
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		height: 1px;
+		overflow: hidden;
+		white-space: nowrap;
+		width: 1px;
+	}
+
+	.input-file:focus-visible {
+		outline: 2px dashed #313437;
+		outline-offset: -4px;
+	}
+}
+
+.form {
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	.main-img {
+		justify-content: right;
+		align-items: right;
+	}
+
+	label span {
+		display: block;
+		font-family: "Raleway", sans-serif;
+		font-weight: 700;
+		font-size: 14px;
+		color: var(--text-color);
+		margin-bottom: -4px;
+	}
+
+	input {
+		font-size: var(--font-size);
+		line-height: var(--font-size);
+		font-family: var(--main-font);
+		background: none;
+		border: none;
+		text-transform: uppercase;
+		display: block;
+		color: #313437;
+		height: 32px;
+		overflow: visible;
+
+		&:focus {
+			outline: none;
+			&::placeholder {
+				opacity: 0;
+			}
+		}
+
+		&::placeholder {
+			color: #313437;
+			transition: opacity 0.2s ease;
+		}
+	}
+
+	.color-code {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		input[type="text"] {
+			width: 90px;
+		}
+		input[type="color"] {
+			-webkit-appearance: none;
+			margin-top: 4px;
+			width: 16px;
+			height: 16px;
+		}
+
+		input[type="color"]::-webkit-color-swatch-wrapper {
+			padding: 0;
+		}
+		input[type="color"]::-webkit-color-swatch {
+			border: none;
+			border-radius: 4px;
+		}
+
+		input[type="color"]:focus-visible::-webkit-color-swatch {
+			outline: 2px dashed #313437;
+			outline-offset: 2px;
+		}
+	}
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.twice-logo-bg {
+	position: absolute;
+	z-index: 1;
+	left: 338px;
+	top: 44px;
+
+	path {
+		fill: var(--logo-color);
+	}
+}
+
+.barcode {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translate(0, -50%);
+
+	path {
+		fill: var(--barcode-color);
+	}
+}
+
+.wrapper {
+	max-width: 640px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 36px;
+	min-height: 100vh;
+}
+
+.controls {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 20px;
+	border-radius: 100px;
+}
+
+.radio-group {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+
+	label {
+		font-family: "Raleway", sans-serif;
+		font-weight: 500;
+		font-size: 14px;
+		text-transform: capitalize;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		cursor: pointer;
+		position: relative;
+		padding-left: 24px;
+
+		input[type="radio"] {
+			clip: rect(0 0 0 0);
+			clip-path: inset(50%);
+			height: 1px;
+			overflow: hidden;
+			position: absolute;
+			white-space: nowrap;
+			width: 1px;
+			outline-offset: 4px;
+		}
+
+		.circle {
+			height: 16px;
+			width: 16px;
+			border-radius: 50%;
+			background-color: #b6b6b6;
+			display: block;
+			position: absolute;
+			left: 0;
+		}
+
+		.text::after {
+			display: block;
+			content: attr(title);
+			font-weight: bold;
+			height: 1px;
+			color: transparent;
+			overflow: hidden;
+			visibility: hidden;
+		}
+
+		input[type="radio"]:checked ~ span.study {
+			background-color: #94ace5;
+		}
+
+		input[type="radio"]:checked ~ span.break {
+			background-color: #d32a51;
+		}
+
+		input[type="radio"]:checked ~ .text {
+			font-weight: bold;
+		}
+
+		input[type="radio"]:focus-visible ~ span.circle {
+			outline: 2px dashed #313437;
+			outline-offset: 2px;
+		}
+	}
+}
+
+.button {
+	font-family: "Raleway", sans-serif;
+	font-weight: 500;
+	font-size: 15px;
+	padding: 10px 20px;
+	color: white;
+	background: #313437;
+	border: none;
+	border-radius: 100px;
+	align-self: center;
+	cursor: pointer;
+
+	&:focus-visible {
+		outline: 2px dashed #313437;
+		outline-offset: 2px;
+	}
+}
+
+@media only screen and (max-width: 670px) {
+	.card-wrapper {
+		transform: scale(0.55);
+	}
+
+	.controls {
+		flex-direction: column;
+		align-items: center;
+		gap: 24px;
+		max-width: 350px;
+	}
+}
+
+@media only screen and (max-width: 380px) {
+	.card-wrapper {
+		transform: scale(0.45);
+	}
+}

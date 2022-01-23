@@ -1,0 +1,497 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap");
+@font-face {
+  font-family: "Hate Your Writing";
+  src: url("/fonts/Hateyourwriting-VGgPx.ttf");
+}
+
+@font-face {
+  font-family: "Audrey";
+  src: url("/fonts/Athena-Regular.ttf");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  --main-font: "Hate Your Writing", sans-serif;
+  --font-size: 32px;
+  --top-color: #d32a51;
+  --bottom-color: #fff4ee;
+  --text-color: #ff6697;
+  --barcode-color: #f96493;
+  --logo-color: #ffe7e7;
+  background-color: #f8f8f8;
+  text-transform: uppercase;
+  font-family: "Hate Your Writing", sans-serif;
+}
+
+body.study {
+  --main-font: "Audrey", sans-serif;
+  --font-size: 20px;
+}
+
+h1,
+h2 {
+  font-size: var(--font-size);
+}
+
+#colorpicker.hide {
+  display: none;
+}
+
+.card-wrapper {
+  width: 640px;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-wrapper.study {
+  --top-color: #94ace5;
+  --bottom-color: #ebf2fc;
+  --text-color: #9fc1ef;
+  --barcode-color: #94ace5;
+  --logo-color: #e2eafa;
+}
+
+.top {
+  font-size: var(--font-size);
+  font-family: var(--main-font);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto 1fr;
+      grid-template-columns: 1fr auto 1fr;
+  background-color: var(--top-color);
+  height: 64px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 32px;
+  padding-right: 32px;
+  color: white;
+  font-size: var(--font-size);
+  border-radius: 20px 20px 0px 0px;
+}
+
+.top :nth-child(2) {
+  margin-left: 36px;
+}
+
+.top :nth-child(3) {
+  -ms-grid-column-align: right;
+      justify-self: right;
+}
+
+.bottom {
+  position: relative;
+  height: 336px;
+  padding-left: 32px;
+  padding-right: 32px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+      grid-template-columns: auto 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 52px;
+          column-gap: 52px;
+  border-radius: 0px 0px 20px 20px;
+  background-color: var(--bottom-color);
+}
+
+.main-img {
+  margin-left: 12px;
+  border: 4px solid var(--top-color);
+  background: var(--bottom-color);
+  width: 204px;
+  height: 260px;
+}
+
+.your-face {
+  display: block;
+  background: var(--logo-color);
+  cursor: pointer;
+  position: relative;
+  max-height: 300px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.your-face img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: 10;
+  position: relative;
+  visibility: hidden;
+}
+
+.your-face .image-persuader {
+  font-size: var(--font-size);
+  font-family: var(--main-font);
+  position: absolute;
+  color: var(--top-color);
+  top: 50%;
+  text-align: center;
+  width: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.your-face .input-file {
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  bottom: 2px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  padding: 8px;
+  z-index: 11;
+  background: white;
+}
+
+.your-face .input-file:not(:focus-visible) {
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.your-face .input-file:not(:focus) {
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.your-face .input-file:focus-visible {
+  outline: 2px dashed #313437;
+  outline-offset: -4px;
+}
+
+.form {
+  z-index: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 12px;
+}
+
+.form .main-img {
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  -webkit-box-align: right;
+      -ms-flex-align: right;
+          align-items: right;
+}
+
+.form label span {
+  display: block;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: -4px;
+}
+
+.form input {
+  font-size: var(--font-size);
+  line-height: var(--font-size);
+  font-family: var(--main-font);
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  display: block;
+  color: #313437;
+  height: 32px;
+  overflow: visible;
+}
+
+.form input:focus {
+  outline: none;
+}
+
+.form input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.form input:focus:-ms-input-placeholder {
+  opacity: 0;
+}
+
+.form input:focus::-ms-input-placeholder {
+  opacity: 0;
+}
+
+.form input:focus::placeholder {
+  opacity: 0;
+}
+
+.form input::-webkit-input-placeholder {
+  color: #313437;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+.form input:-ms-input-placeholder {
+  color: #313437;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+.form input::-ms-input-placeholder {
+  color: #313437;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+.form input::placeholder {
+  color: #313437;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+.form .color-code {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 4px;
+}
+
+.form .color-code input[type="text"] {
+  width: 90px;
+}
+
+.form .color-code input[type="color"] {
+  -webkit-appearance: none;
+  margin-top: 4px;
+  width: 16px;
+  height: 16px;
+}
+
+.form .color-code input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form .color-code input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+.form .color-code input[type="color"]:focus-visible::-webkit-color-swatch {
+  outline: 2px dashed #313437;
+  outline-offset: 2px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.twice-logo-bg {
+  position: absolute;
+  z-index: 1;
+  left: 338px;
+  top: 44px;
+}
+
+.twice-logo-bg path {
+  fill: var(--logo-color);
+}
+
+.barcode {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+
+.barcode path {
+  fill: var(--barcode-color);
+}
+
+.wrapper {
+  max-width: 640px;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 36px;
+  min-height: 100vh;
+}
+
+.controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  border-radius: 100px;
+}
+
+.radio-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 24px;
+}
+
+.radio-group label {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: capitalize;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  position: relative;
+  padding-left: 24px;
+}
+
+.radio-group label input[type="radio"] {
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  outline-offset: 4px;
+}
+
+.radio-group label .circle {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #b6b6b6;
+  display: block;
+  position: absolute;
+  left: 0;
+}
+
+.radio-group label .text::after {
+  display: block;
+  content: attr(title);
+  font-weight: bold;
+  height: 1px;
+  color: transparent;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.radio-group label input[type="radio"]:checked ~ span.study {
+  background-color: #94ace5;
+}
+
+.radio-group label input[type="radio"]:checked ~ span.break {
+  background-color: #d32a51;
+}
+
+.radio-group label input[type="radio"]:checked ~ .text {
+  font-weight: bold;
+}
+
+.radio-group label input[type="radio"]:focus-visible ~ span.circle {
+  outline: 2px dashed #313437;
+  outline-offset: 2px;
+}
+
+.button {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 10px 20px;
+  color: white;
+  background: #313437;
+  border: none;
+  border-radius: 100px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 2px dashed #313437;
+  outline-offset: 2px;
+}
+
+@media only screen and (max-width: 670px) {
+  .card-wrapper {
+    -webkit-transform: scale(0.55);
+            transform: scale(0.55);
+  }
+  .controls {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 24px;
+    max-width: 350px;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .card-wrapper {
+    -webkit-transform: scale(0.45);
+            transform: scale(0.45);
+  }
+}
+/*# sourceMappingURL=style.css.map */
