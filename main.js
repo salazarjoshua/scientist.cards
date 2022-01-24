@@ -45,8 +45,8 @@ function downloadCard() {
         })
         .then(dataUrl2 => {
             var img = new Image();
-            img.src = dataUrl;
-            downloadURI(dataUrl, "Scientist-Card.png");
+            img.src = dataUrl2;
+            downloadURI(dataUrl2, "Scientist-Card.png");
             colorpicker.classList.remove('hide');
         });
       });
