@@ -33,18 +33,37 @@ function downloadCard() {
     colorpicker.classList.add('hide');
 
     domtoimage.toPng(element, {
+        width: element.clientWidth * scale,
+        height: element.clientHeight * scale,
+        style: { transform: 'scale('+scale+')', transformOrigin: 'top left'}
+      }).then(dataUrl => {
+      domtoimage
+        .toPng(element, {
             width: element.clientWidth * scale,
             height: element.clientHeight * scale,
             style: { transform: 'scale('+scale+')', transformOrigin: 'top left'}
         })
-        .then(function (dataUrl) {
+        .then(dataUrl2 => {
             var img = new Image();
             img.src = dataUrl;
             downloadURI(dataUrl, "Scientist-Card.png");
             colorpicker.classList.remove('hide');
-            // document.body.appendChild(img);
-        })
-        .catch(function (error) { console.error('oops, something went wrong!', error); });
+        });
+      });
+    
+
+    // domtoimage.toPng(element, {
+    //         width: element.clientWidth * scale,
+    //         height: element.clientHeight * scale,
+    //         style: { transform: 'scale('+scale+')', transformOrigin: 'top left'}
+    //     })
+    //     .then(function (dataUrl) {
+    //         var img = new Image();
+    //         img.src = dataUrl;
+    //         downloadURI(dataUrl, "Scientist-Card.png");
+    //         colorpicker.classList.remove('hide');
+    //     })
+    //     .catch(function (error) { console.error('oops, something went wrong!', error); });
 }
 
 function downloadURI(uri, name) {
@@ -56,6 +75,8 @@ function downloadURI(uri, name) {
     document.body.removeChild(link);
     delete link;
 }
+
+
 
 
 // change color
