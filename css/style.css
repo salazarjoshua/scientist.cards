@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap");
 @font-face {
-  font-family: "Hate Your Writing";
-  src: url("/fonts/Hateyourwriting-VGgPx.ttf");
+  font-family: "Serial Regular";
+  src: url("/fonts/SerialRegular.otf");
 }
 
 @font-face {
-  font-family: "Audrey";
+  font-family: "Athena";
   src: url("/fonts/Athena-Regular.ttf");
 }
 
@@ -17,8 +17,8 @@
 }
 
 body {
-  --main-font: "Hate Your Writing", sans-serif;
-  --font-size: 32px;
+  --main-font: "Serial Regular", sans-serif;
+  --font-size: 20px;
   --top-color: #d32a51;
   --bottom-color: #fff4ee;
   --text-color: #ff6697;
@@ -26,11 +26,11 @@ body {
   --logo-color: #ffe7e7;
   background-color: #f8f8f8;
   text-transform: uppercase;
-  font-family: "Hate Your Writing", sans-serif;
+  font-family: "Serial Regular", sans-serif;
 }
 
 body.study {
-  --main-font: "Audrey", sans-serif;
+  --main-font: "Athena", sans-serif;
   --font-size: 20px;
 }
 
@@ -83,7 +83,7 @@ h2 {
 }
 
 .top :nth-child(2) {
-  margin-left: 36px;
+  margin-left: 24px;
 }
 
 .top :nth-child(3) {
@@ -272,6 +272,22 @@ h2 {
   color: #313437;
   -webkit-transition: opacity 0.2s ease;
   transition: opacity 0.2s ease;
+}
+
+.form input::-webkit-input-placeholder.hide {
+  opacity: 0;
+}
+
+.form input:-ms-input-placeholder.hide {
+  opacity: 0;
+}
+
+.form input::-ms-input-placeholder.hide {
+  opacity: 0;
+}
+
+.form input::placeholder.hide {
+  opacity: 0;
 }
 
 .form .color-code {

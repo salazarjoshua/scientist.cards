@@ -100,3 +100,12 @@ function changeHandler(event) {
 Array.prototype.forEach.call(radios, function(radio) {
    radio.addEventListener('change', changeHandler);
 });
+
+
+// Auto Format
+
+var cleave = new Cleave('.birthday', {
+    date: true,
+    delimiter: '-',
+    datePattern: ['Y', 'm', 'd']
+});
