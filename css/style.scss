@@ -28,37 +28,73 @@ body {
 	background-color: #f8f8f8;
 	text-transform: uppercase;
 	font-family: "Serial Regular", sans-serif;
+
+	&.version-study {
+		--main-font: "Athena", sans-serif;
+		--font-size: 20px;
+		--top-color: #94ace5;
+		--bottom-color: #ebf2fc;
+		--text-color: #9fc1ef;
+		--barcode-color: #94ace5;
+		--logo-color: #e2eafa;
+	}
 }
 
-body.study {
-	--main-font: "Athena", sans-serif;
-	--font-size: 20px;
+.wrapper {
+	width: 100%;
+	max-width: 640px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 36px;
+	min-height: 100vh;
 }
 
-h1,
-h2 {
+h1, h2 {
 	font-size: var(--font-size);
 }
 
-#colorpicker.hide {
-	display: none;
+
+.hide {
+	opacity: 0;
 }
 
-.card-wrapper {
+.card-container {
+	perspective: 1500px;
+	margin: 0 auto;
+}	
+
+.card {
 	width: 640px;
 	height: 400px;
+	transform-style: preserve-3d;
+	position: relative;
 	border-radius: 20px;
-	overflow: hidden;
 	box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+	transition: transform 0.8s cubic-bezier(.55, -.62, .27, 1.2);
+
+	&.flip {
+		transform: rotateY(-180deg);
+	}
+
+	&__front, &__back {
+		backface-visibility: hidden;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	&__back {
+		z-index: 99;
+		min-width: 640px;
+		border-radius: 20px;
+		transform: rotateY(180deg);
+	}
 }
 
-.card-wrapper.study {
-	--top-color: #94ace5;
-	--bottom-color: #ebf2fc;
-	--text-color: #9fc1ef;
-	--barcode-color: #94ace5;
-	--logo-color: #e2eafa;
-}
 
 .top {
 	font-size: var(--font-size);
@@ -97,7 +133,10 @@ h2 {
 	background-color: var(--bottom-color);
 }
 
-.main-img {
+
+/*-- INPUT ELEMENTS -----*/
+
+.main-image {
 	margin-left: 12px;
 	border: 4px solid var(--top-color);
 	background: var(--bottom-color);
@@ -164,7 +203,7 @@ h2 {
 	}
 
 	.input-file:focus-visible {
-		outline: 2px dashed #313437;
+		outline: 2px solid #313437;
 		outline-offset: -4px;
 	}
 }
@@ -175,7 +214,7 @@ h2 {
 	flex-direction: column;
 	gap: 12px;
 
-	.main-img {
+	.main-image {
 		justify-content: right;
 		align-items: right;
 	}
@@ -243,7 +282,7 @@ h2 {
 		}
 
 		input[type="color"]:focus-visible::-webkit-color-swatch {
-			outline: 2px dashed #313437;
+			outline: 2px solid #313437;
 			outline-offset: 2px;
 		}
 	}
@@ -283,22 +322,12 @@ input[type="number"] {
 	}
 }
 
-.wrapper {
-	max-width: 640px;
-	margin: auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 36px;
-	min-height: 100vh;
-}
 
-.controls {
+.buttons {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding: 20px;
+	padding: 20px 10px;
 	border-radius: 100px;
 }
 
@@ -334,7 +363,7 @@ input[type="number"] {
 			height: 16px;
 			width: 16px;
 			border-radius: 50%;
-			background-color: #b6b6b6;
+			background-color: #E5E5E5;
 			display: block;
 			position: absolute;
 			left: 0;
@@ -350,11 +379,11 @@ input[type="number"] {
 			visibility: hidden;
 		}
 
-		input[type="radio"]:checked ~ span.study {
+		input[type="radio"]:checked ~ span.version-study {
 			background-color: #94ace5;
 		}
 
-		input[type="radio"]:checked ~ span.break {
+		input[type="radio"]:checked ~ span.version-break {
 			background-color: #d32a51;
 		}
 
@@ -363,36 +392,52 @@ input[type="number"] {
 		}
 
 		input[type="radio"]:focus-visible ~ span.circle {
-			outline: 2px dashed #313437;
+			outline: 2px solid #313437;
 			outline-offset: 2px;
 		}
 	}
 }
 
-.button {
+.btn {
 	font-family: "Raleway", sans-serif;
 	font-weight: 500;
-	font-size: 15px;
+	font-size: 14px;
 	padding: 10px 20px;
-	color: white;
-	background: #313437;
 	border: none;
 	border-radius: 100px;
 	align-self: center;
 	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
 
 	&:focus-visible {
-		outline: 2px dashed #313437;
+		outline: 2px solid #313437;
 		outline-offset: 2px;
+	}
+
+	&--primary {
+		color: white;
+		background-color: #313437;
+
+		&:hover, &:focus {
+			background-color: #0F0E0E;
+		}
+	}
+
+	&--secondary {
+		background-color: transparent;
+
+		&:hover, &:focus {
+			background-color: #E5E5E5;
+		}
 	}
 }
 
 @media only screen and (max-width: 670px) {
-	.card-wrapper {
+	.scale {
 		transform: scale(0.55);
 	}
 
-	.controls {
+	.buttons {
 		flex-direction: column;
 		align-items: center;
 		gap: 24px;
@@ -401,7 +446,7 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 380px) {
-	.card-wrapper {
+	.scale {
 		transform: scale(0.45);
 	}
 }

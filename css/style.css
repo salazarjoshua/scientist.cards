@@ -29,35 +29,86 @@ body {
   font-family: "Serial Regular", sans-serif;
 }
 
-body.study {
+body.version-study {
   --main-font: "Athena", sans-serif;
   --font-size: 20px;
-}
-
-h1,
-h2 {
-  font-size: var(--font-size);
-}
-
-#colorpicker.hide {
-  display: none;
-}
-
-.card-wrapper {
-  width: 640px;
-  height: 400px;
-  border-radius: 20px;
-  overflow: hidden;
-  -webkit-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.card-wrapper.study {
   --top-color: #94ace5;
   --bottom-color: #ebf2fc;
   --text-color: #9fc1ef;
   --barcode-color: #94ace5;
   --logo-color: #e2eafa;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 36px;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  font-size: var(--font-size);
+}
+
+.hide {
+  opacity: 0;
+}
+
+.card-container {
+  -webkit-perspective: 1500px;
+          perspective: 1500px;
+  margin: 0 auto;
+}
+
+.card {
+  width: 640px;
+  height: 400px;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  position: relative;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+  -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.55, -0.62, 0.27, 1.2);
+  transition: -webkit-transform 0.8s cubic-bezier(0.55, -0.62, 0.27, 1.2);
+  transition: transform 0.8s cubic-bezier(0.55, -0.62, 0.27, 1.2);
+  transition: transform 0.8s cubic-bezier(0.55, -0.62, 0.27, 1.2), -webkit-transform 0.8s cubic-bezier(0.55, -0.62, 0.27, 1.2);
+}
+
+.card.flip {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card__front, .card__back {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card__back {
+  z-index: 99;
+  min-width: 640px;
+  border-radius: 20px;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 .top {
@@ -109,7 +160,8 @@ h2 {
   background-color: var(--bottom-color);
 }
 
-.main-img {
+/*-- INPUT ELEMENTS -----*/
+.main-image {
   margin-left: 12px;
   border: 4px solid var(--top-color);
   background: var(--bottom-color);
@@ -183,7 +235,7 @@ h2 {
 }
 
 .your-face .input-file:focus-visible {
-  outline: 2px dashed #313437;
+  outline: 2px solid #313437;
   outline-offset: -4px;
 }
 
@@ -199,7 +251,7 @@ h2 {
   gap: 12px;
 }
 
-.form .main-img {
+.form .main-image {
   -webkit-box-pack: right;
       -ms-flex-pack: right;
           justify-content: right;
@@ -321,7 +373,7 @@ h2 {
 }
 
 .form .color-code input[type="color"]:focus-visible::-webkit-color-swatch {
-  outline: 2px dashed #313437;
+  outline: 2px solid #313437;
   outline-offset: 2px;
 }
 
@@ -360,27 +412,7 @@ input[type="number"] {
   fill: var(--barcode-color);
 }
 
-.wrapper {
-  max-width: 640px;
-  margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  gap: 36px;
-  min-height: 100vh;
-}
-
-.controls {
+.buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -388,7 +420,7 @@ input[type="number"] {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding: 20px 10px;
   border-radius: 100px;
 }
 
@@ -435,7 +467,7 @@ input[type="number"] {
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  background-color: #b6b6b6;
+  background-color: #E5E5E5;
   display: block;
   position: absolute;
   left: 0;
@@ -451,11 +483,11 @@ input[type="number"] {
   visibility: hidden;
 }
 
-.radio-group label input[type="radio"]:checked ~ span.study {
+.radio-group label input[type="radio"]:checked ~ span.version-study {
   background-color: #94ace5;
 }
 
-.radio-group label input[type="radio"]:checked ~ span.break {
+.radio-group label input[type="radio"]:checked ~ span.version-break {
   background-color: #d32a51;
 }
 
@@ -464,36 +496,53 @@ input[type="number"] {
 }
 
 .radio-group label input[type="radio"]:focus-visible ~ span.circle {
-  outline: 2px dashed #313437;
+  outline: 2px solid #313437;
   outline-offset: 2px;
 }
 
-.button {
+.btn {
   font-family: "Raleway", sans-serif;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   padding: 10px 20px;
-  color: white;
-  background: #313437;
   border: none;
   border-radius: 100px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
   cursor: pointer;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.button:focus-visible {
-  outline: 2px dashed #313437;
+.btn:focus-visible {
+  outline: 2px solid #313437;
   outline-offset: 2px;
 }
 
+.btn--primary {
+  color: white;
+  background-color: #313437;
+}
+
+.btn--primary:hover, .btn--primary:focus {
+  background-color: #0F0E0E;
+}
+
+.btn--secondary {
+  background-color: transparent;
+}
+
+.btn--secondary:hover, .btn--secondary:focus {
+  background-color: #E5E5E5;
+}
+
 @media only screen and (max-width: 670px) {
-  .card-wrapper {
+  .scale {
     -webkit-transform: scale(0.55);
             transform: scale(0.55);
   }
-  .controls {
+  .buttons {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -507,7 +556,7 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 380px) {
-  .card-wrapper {
+  .scale {
     -webkit-transform: scale(0.45);
             transform: scale(0.45);
   }
