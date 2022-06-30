@@ -41,10 +41,10 @@
 
 <body>
 
-  <div class="wrapper">
+  <div class="wrapper main">
     <div class="scale">
       <div class="card-container">
-        <div class="card" id="scientistCard">
+        <div class="card" id="scientistCard" data-card="card-generator">
           <div class="card__front" id="cardFront">
             <div class="top">
               <p aria-label="Formula of Love">>> FORMULA OF LOVE :</p>
@@ -66,7 +66,8 @@
               <div class="main-image">
                 <label for="image-input"></label>
                 <label class="your-face" id="image-form" for="image-input">
-                  <img id="imager" src="/assets/sample-picture.jpg" alt="Your Image Here" />
+                  <img id="imager" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                    alt="Your Image Here" />
                   <input type="file" id="image-input" class="input-file" accept=".jpg, .jpeg, .png">
                   <p class="image-persuader">SELECT PHOTO</p>
                 </label>
@@ -151,34 +152,52 @@
             <img src="/assets/scientist-card-break-ver-back.svg" alt="" id="cardBackImg">
           </div>
         </div>
+        <div class="loading d-none">
+          <img src="./assets/nayeon.gif" alt="TWICE">
+          <p>Nayeon is generating your card...</p>
+        </div>
       </div>
     </div>
 
-    <div class="buttons">
-      <div class="radio-group">
-        <label for="version-break" class="radio">
-          <input type="radio" id="version-break" name="color" value="version-break" checked>
-          <p class="text" title="Break It Ver." aria-label="Break It Version">Break It Ver.</p>
-          <span class="circle version-break"></span>
-        </label>
-
-        <label for="version-study" class="radio">
-          <input type="radio" id="version-study" name="color" value="version-study">
-          <p class="text" title="Study About Love Ver." aria-label="Study About Love Version">Study About Love Ver.</p>
-          <span class="circle version-study"></span>
-        </label>
-      </div>
-      <div>
-        <button class="btn btn--secondary" onclick="flipCard()" id="btnFlip">Flip Card</button>
-        <button onclick="downloadCard()" id="btnDownload" class="btn btn--primary"
-          data-splitbee-event="Download Card">Download Card</button>
+    <div data-card="card-generator" style="width: 100%;">
+      <div class="buttons">
+        <div class="radio-group">
+          <label for="version-break" class="radio">
+            <input type="radio" id="version-break" name="color" value="version-break" checked>
+            <p class="text" title="Break It Ver." aria-label="Break It Version">Break It Ver.</p>
+            <span class="circle version-break"></span>
+          </label>
+  
+          <label for="version-study" class="radio">
+            <input type="radio" id="version-study" name="color" value="version-study">
+            <p class="text" title="Study About Love Ver." aria-label="Study About Love Version">Study About Love Ver.</p>
+            <span class="circle version-study"></span>
+          </label>
+        </div>
+        <div>
+          <button class="btn btn--secondary" id="btnFlip">Flip Card</button>
+          <button class="btn btn--primary" id="btnGetPNG" data-splitbee-event="Download Card">Generate PNG</button>
+        </div>
       </div>
     </div>
+
+    <div class="d-none" data-card="card-output" style="width: 100%;">
+      <div class="buttons">
+        <div class="order-2">
+          <button class="btn btn--secondary" id="btnBack">Back</button>
+        </div>
+        <div>
+          <button class="btn btn--primary" id="btnDownload">Download Card</button>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
-  <script src="/main.js"></script>
+  <script src="/main.js" type="module"></script>
 </body>
 
 </html>
