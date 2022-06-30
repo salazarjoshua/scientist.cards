@@ -1,16 +1,34 @@
-
 let isFlipped = false;
 
+const body = document.querySelector('body');
+const loadingGIF = document.querySelector('.loading');
+
+const cardContainer = document.querySelector('.card-container');
+const card = document.querySelector('.card');
+const cardFront = document.getElementById('cardFront');
+const cardBack = document.getElementById('cardBack');
+const colorpicker = document.getElementById('colorpicker');
+
+const btnGetPNG = document.getElementById('btnGetPNG');
+const btnDownload = document.getElementById('btnDownload');
+const btnFlip = document.getElementById("btnFlip");  
+const btnBack = document.getElementById("btnBack");  
+
+const mainButtons = document.querySelectorAll(".mainbtns");
+
+const cardGenerator = document.querySelectorAll("[data-card='card-generator']");
+const cardOutput = document.querySelectorAll("[data-card='card-output']");
+
+
+const scale = 2;
+
+let cardURL = '';
 
 /*-- Download Card ------*/
 
-function downloadCard() {
-    let card = document.getElementById('scientistCard')
-    let colorpicker = document.getElementById('colorpicker')
-    let cardFront = document.getElementById('cardFront')
-    let cardBack = document.getElementById('cardBack')
-
-    let scale = 2;
+function getPNG() {
+    
+    btnGetPNG.disabled = true;
 
     if(isFlipped){
         cardFront.classList.add('hide');
@@ -20,30 +38,52 @@ function downloadCard() {
         cardBack.classList.add('hide');
     }
 
-
-    domtoimage.toPng(card, {
-        width: card.clientWidth * scale,
-        height: card.clientHeight * scale,
-        style: { transform: 'scale('+scale+')', transformOrigin: 'top left'}
-      }).then(dataUrl => {
-      domtoimage
-        .toPng(card, {
+    domtoimage.toPng(card).then(dataUrl => {
+      domtoimage.toPng(card, {  
             width: card.clientWidth * scale,
             height: card.clientHeight * scale,
-            style: { transform: 'scale('+scale+')', transformOrigin: 'top left'}
+            style: {
+                transform: 'scale('+scale+')',
+                transformOrigin: 'top left',
+            }
         })
         .then(dataUrl2 => {
-            var img = new Image();
-            img.src = dataUrl2;
-            downloadURI(dataUrl2, "Scientist-Card.png");
+            card.style.boxShadow = "none";
+            var newPNG = new Image();
+            newPNG.src = dataUrl2;
+            cardURL = dataUrl2;
+            
+            newPNG.classList.add("generated__png");
             colorpicker.classList.remove('hide');
             cardFront.classList.remove('hide');
-            cardBack.style.transform = "rotateY(180deg)"
             cardBack.classList.remove('hide');
+            cardBack.style.transform = "rotateY(180deg)";
             card.style.backgroundImage = "none";
+
+
+            loadingGIF.classList.remove('d-none');
+            setTimeout(function() {
+                loadingGIF.classList.add('d-none');
+                cardContainer.appendChild(newPNG);
+                cardOutput.forEach(cardGenerators => cardGenerators.classList.remove("d-none"))
+            }, 1500); 
+            hideCardGenerator();
+            card.style.boxShadow = "0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1)";
+            card.style.display = "none";
+            btnGetPNG.disabled = false;
         });
       });
 }
+
+function downloadCard() {
+    downloadURI(cardURL, "Scientist-Card.png");
+    btnDownload.disabled = true;
+    setTimeout(() => {
+        btnDownload.disabled = false;
+        btnDownload.focus();
+    }, 1500);
+}
+
 
 function downloadURI(uri, name) {
     var link = document.createElement("a");
@@ -52,37 +92,78 @@ function downloadURI(uri, name) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    delete link;
 }
+
+function hideCardGenerator() {
+    cardGenerator.forEach(cardGenerators => cardGenerators.classList.add("d-none"))
+    
+}
+
+function showCardGenerator() {
+    const newpnghey = document.querySelector("img.generated__png")
+    console.log(newpnghey);
+    newpnghey.remove();
+    card.style.display = "block";
+    
+    cardOutput.forEach(cardGenerators => cardGenerators.classList.add("d-none"))
+    cardGenerator.forEach(cardGenerators => cardGenerators.classList.remove("d-none"))
+}
+btnBack.addEventListener('click', showCardGenerator)
+
+
+
+
+
+
+btnGetPNG.addEventListener('click', getPNG);
+btnDownload.addEventListener('click', downloadCard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*-- Flip Card ------*/
 function flipCard() {
-    var card = document.getElementById("scientistCard");
-    var btnFlip = document.getElementById("btnFlip");   
-
     card.classList.toggle("flip");
-
     btnFlip.disabled = true;
+
     setTimeout(() => {
         btnFlip.disabled = false;
+        btnFlip.focus();
     }, 800);
 
     isFlipped = !isFlipped;
 }
 
+btnFlip.addEventListener('click', flipCard);
+
 /*-- Change Version ------*/
-var radios = document.querySelectorAll('input[type=radio][name="color"]');
+const radios = document.querySelectorAll('input[type=radio][name="color"]');
+const cardBackImage = document.getElementById("cardBackImg");
 
 function changeHandler(event) {
-    let body = document.querySelector('body')
-    
    if ( this.value === 'version-break' ) {
     body.classList.remove('version-study');
-    document.getElementById("cardBackImg").src="/assets/scientist-card-break-ver-back.svg";
+    cardBackImage.src="/assets/scientist-card-break-ver-back.svg";
    } else if ( this.value === 'version-study' ) {
     body.classList.add('version-study');
-    document.getElementById("cardBackImg").src="/assets/scientist-card-study-ver-back.svg";
+    cardBackImage.src="/assets/scientist-card-study-ver-back.svg";
    }  
 }
 
@@ -109,12 +190,15 @@ document.querySelector('#image-input').addEventListener('change', function() {
 });
 
 /*-- Color Code ------*/
-document.querySelector('#colorpicker').addEventListener('change', function() {
-    document.querySelector('#hexcolor').value = this.value;
+const colorPicker = document.querySelector('#colorpicker');
+const hexColor =  document.querySelector('#hexcolor');
+
+colorPicker.addEventListener('change', function() {
+    hexColor.value = this.value;
 });
 
-document.querySelector('#hexcolor').addEventListener('change', function() {
-    document.querySelector('#colorpicker').value = this.value;
+hexColor.addEventListener('change', function() {
+    colorPicker.value = this.value;
 });
 
 /*-- Auto Format Birthday ------*/

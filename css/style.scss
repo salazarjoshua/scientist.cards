@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap");
+
+@font-face {
+	font-family: "Raleway";
+	src: url("/fonts/Raleway-VariableFont_wght.ttf") format("truetype-variations");
+	font-weight: 1 999;
+}
 
 @font-face {
 	font-family: "Serial Regular";
@@ -24,6 +30,7 @@ body {
 	--text-color: #ff6697;
 	--barcode-color: #f96493;
 	--logo-color: #ffe7e7;
+	--top-padding: 19px 32px;
 
 	background-color: #f8f8f8;
 	text-transform: uppercase;
@@ -37,6 +44,7 @@ body {
 		--text-color: #9fc1ef;
 		--barcode-color: #94ace5;
 		--logo-color: #e2eafa;
+		--top-padding: 20px 32px;
 	}
 }
 
@@ -49,6 +57,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	gap: 36px;
+	padding: 64px 0;
 	min-height: 100vh;
 }
 
@@ -61,9 +70,20 @@ h1, h2 {
 	opacity: 0;
 }
 
+.d-none {
+	display: none;
+}
+
+
+.visibility-hidden {
+	height: 0px;
+	visibility: hidden;
+}
+
 .card-container {
 	perspective: 1500px;
 	margin: 0 auto;
+	border-radius: 20px;
 }	
 
 .card {
@@ -72,9 +92,8 @@ h1, h2 {
 	transform-style: preserve-3d;
 	position: relative;
 	border-radius: 20px;
-	box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
 	transition: transform 0.8s cubic-bezier(.55, -.62, .27, 1.2);
-
+	box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
 	&.flip {
 		transform: rotateY(-180deg);
 	}
@@ -102,11 +121,10 @@ h1, h2 {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 	background-color: var(--top-color);
-	height: 64px;
+	// height: 64px;
 	justify-content: space-between;
 	align-items: center;
-	padding-left: 32px;
-	padding-right: 32px;
+	padding: var(--top-padding);
 	color: white;
 	font-size: var(--font-size);
 	border-radius: 20px 20px 0px 0px;
@@ -137,6 +155,8 @@ h1, h2 {
 /*-- INPUT ELEMENTS -----*/
 
 .main-image {
+	margin-top: 38px;
+	margin-bottom: 38px;
 	margin-left: 12px;
 	border: 4px solid var(--top-color);
 	background: var(--bottom-color);
@@ -213,6 +233,8 @@ h1, h2 {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	margin-top: 32.75px;
+	margin-bottom: 32.75px;
 
 	.main-image {
 		justify-content: right;
@@ -329,6 +351,7 @@ input[type="number"] {
 	width: 100%;
 	padding: 20px 10px;
 	border-radius: 100px;
+	margin: auto;
 }
 
 .radio-group {
@@ -425,6 +448,7 @@ input[type="number"] {
 
 	&--secondary {
 		background-color: transparent;
+		color: #000000;
 
 		&:hover, &:focus {
 			background-color: #E5E5E5;
@@ -435,6 +459,10 @@ input[type="number"] {
 @media only screen and (max-width: 670px) {
 	.scale {
 		transform: scale(0.55);
+
+		.loading {
+			transform: scale(1.5);
+		}
 	}
 
 	.buttons {
@@ -443,10 +471,50 @@ input[type="number"] {
 		gap: 24px;
 		max-width: 350px;
 	}
+
+	.order-2 {
+		order: 2;
+	}
 }
 
 @media only screen and (max-width: 380px) {
 	.scale {
 		transform: scale(0.45);
+
+
+		.loading {
+			transform: scale(1.6);
+		}
+	}
+}
+
+// .png  img{
+// 	transform: scale(0.5);
+// 	transform-origin: top left;
+// }
+
+// .secondary {
+// 	display: none;
+// }
+
+.generated__png {
+	width: 640px;
+	// max-width: 100%;
+	border-radius: 20px;
+	box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.05), 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.loading {
+
+	text-align: center;
+	font-family: "Raleway", sans-serif;
+	font-weight: 700;
+
+	p {
+		margin-top: 24px;
+	}
+
+	img{
+		max-width: 300px;
 	}
 }
