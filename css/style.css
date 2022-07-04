@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 @font-face {
   font-family: "Raleway";
   src: url("/fonts/Raleway-VariableFont_wght.ttf") format("truetype-variations");
@@ -22,7 +23,7 @@ body {
   --font-size: 20px;
   --top-color: #d32a51;
   --bottom-color: #fff4ee;
-  --text-color: #ff6697;
+  --primary-color: #ff6697;
   --barcode-color: #f96493;
   --logo-color: #ffe7e7;
   --top-padding: 19px 32px;
@@ -35,12 +36,42 @@ body.version-study {
   --font-size: 20px;
   --top-color: #94ace5;
   --bottom-color: #ebf2fc;
-  --text-color: #9fc1ef;
+  --primary-color: #9fc1ef;
   --barcode-color: #94ace5;
   --logo-color: #e2eafa;
   --top-padding: 20px 32px;
 }
 
+/*-- Main Elements -----*/
+h1,
+h2 {
+  font-size: var(--font-size);
+}
+
+a:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+button:focus {
+  outline: 2px solid var(--primary-color);
+}
+
+/*-- Utilities -----*/
+.d-none {
+  display: none;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.hide {
+  opacity: 0;
+}
+
+/*-- Main Content -----*/
 .wrapper {
   width: 100%;
   max-width: 640px;
@@ -50,25 +81,24 @@ body.version-study {
   align-items: center;
   justify-content: center;
   gap: 36px;
-  padding: 64px 0;
+  padding: 4rem 0 1rem;
   min-height: 100vh;
 }
 
-h1, h2 {
-  font-size: var(--font-size);
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
 }
 
-.hide {
-  opacity: 0;
-}
-
-.d-none {
-  display: none;
-}
-
-.visibility-hidden {
-  height: 0px;
-  visibility: hidden;
+.card-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 400px;
 }
 
 .card-container {
@@ -207,7 +237,7 @@ h1, h2 {
   width: 1px;
 }
 .your-face .input-file:focus-visible {
-  outline: 2px solid #313437;
+  outline: 2px solid var(--primary-color);
   outline-offset: -4px;
 }
 
@@ -228,7 +258,7 @@ h1, h2 {
   font-family: "Raleway", sans-serif;
   font-weight: 700;
   font-size: 14px;
-  color: var(--text-color);
+  color: var(--primary-color);
   margin-bottom: -4px;
 }
 .form input {
@@ -300,7 +330,7 @@ h1, h2 {
   border-radius: 4px;
 }
 .form .color-code input[type=color]:focus-visible::-webkit-color-swatch {
-  outline: 2px solid #313437;
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
@@ -343,14 +373,15 @@ input[type=number] {
   padding: 20px 10px;
   border-radius: 100px;
   margin: auto;
+  flex-grow: 1;
 }
 
-.radio-group {
+.versions {
   display: flex;
   align-items: center;
   gap: 24px;
 }
-.radio-group label {
+.versions label {
   font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -362,7 +393,7 @@ input[type=number] {
   position: relative;
   padding-left: 24px;
 }
-.radio-group label input[type=radio] {
+.versions label input[type=radio] {
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(50%);
           clip-path: inset(50%);
@@ -373,7 +404,7 @@ input[type=number] {
   width: 1px;
   outline-offset: 4px;
 }
-.radio-group label .circle {
+.versions label .circle {
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -382,7 +413,7 @@ input[type=number] {
   position: absolute;
   left: 0;
 }
-.radio-group label .text::after {
+.versions label .text::after {
   display: block;
   content: attr(title);
   font-weight: bold;
@@ -391,17 +422,17 @@ input[type=number] {
   overflow: hidden;
   visibility: hidden;
 }
-.radio-group label input[type=radio]:checked ~ span.version-study {
+.versions label input[type=radio]:checked ~ span.version-study {
   background-color: #94ace5;
 }
-.radio-group label input[type=radio]:checked ~ span.version-break {
+.versions label input[type=radio]:checked ~ span.version-break {
   background-color: #d32a51;
 }
-.radio-group label input[type=radio]:checked ~ .text {
+.versions label input[type=radio]:checked ~ .text {
   font-weight: bold;
 }
-.radio-group label input[type=radio]:focus-visible ~ span.circle {
-  outline: 2px solid #313437;
+.versions label input[type=radio]:focus-visible ~ span.circle {
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 
@@ -417,7 +448,7 @@ input[type=number] {
   transition: background-color 0.3s ease-in-out;
 }
 .btn:focus-visible {
-  outline: 2px solid #313437;
+  outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
 .btn--primary {
@@ -435,33 +466,6 @@ input[type=number] {
   background-color: #E5E5E5;
 }
 
-@media only screen and (max-width: 670px) {
-  .scale {
-    transform: scale(0.55);
-  }
-  .scale .loading {
-    transform: scale(1.5);
-  }
-
-  .buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    max-width: 350px;
-  }
-
-  .order-2 {
-    order: 2;
-  }
-}
-@media only screen and (max-width: 380px) {
-  .scale {
-    transform: scale(0.45);
-  }
-  .scale .loading {
-    transform: scale(1.6);
-  }
-}
 .generated__png {
   width: 640px;
   border-radius: 20px;
@@ -478,4 +482,57 @@ input[type=number] {
 }
 .loading img {
   max-width: 300px;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  gap: 0.5rem;
+}
+footer a {
+  font-family: "Inter", sans-serif;
+  text-transform: none;
+  font-size: 12px;
+  text-decoration: none;
+  color: #313437;
+  text-align: center;
+}
+footer a strong {
+  color: #ff6697;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 670px) {
+  .card-wrapper {
+    transform: scale(0.55);
+  }
+  .card-wrapper .loading {
+    transform: scale(1.5);
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    max-width: 350px;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+
+  .order-2 {
+    order: 2;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .card-wrapper {
+    transform: scale(0.45);
+  }
+  .card-wrapper .loading {
+    transform: scale(1.6);
+  }
 }/*# sourceMappingURL=style.css.map */
